@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <h1>hello</h1>
+  <div class="container">
+    <HospitalTop></HospitalTop>
+    <div class="content">
+      <!-- 展示路由组件的区域 -->
+      <!-- <router-view></router-view> -->
+    </div>
+    <HospitalBottom></HospitalBottom>
   </div>
 </template>
 
@@ -9,5 +14,14 @@
 </script>
 
 <style scoped>
-
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .content {
+    margin-top: 70px;
+    width: 1200px;
+    min-height: 700px;
+  }
+}
 </style>
