@@ -2,7 +2,7 @@
 import request from "@/utils/request";
 import type {
   HospitalResponseData,
-  // HospitalLevelAndRegionResponseData,
+  HospitalLevelAndRegionResponseData,
   // HospitalInfo,
 } from "./type";
 
@@ -16,27 +16,27 @@ enum API {
   HOSPITALINFO_URL = "/hosp/hospital/findByHosname/",
 }
 //获取医院的数据
-export const reqHospital = (
-  page: number = 1,
-  limit: number = 10,
-  hostype = "",
-  districtCode = ""
-) => request.get<any, HospitalResponseData>(API.HOSPITAL_URL + `${page}/${limit}`);
 // export const reqHospital = (
-//   page: number,
-//   limit: number,
+//   page: number = 1,
+//   limit: number = 10,
 //   hostype = "",
 //   districtCode = ""
-// ) =>
-//   request.get<any, HospitalResponseData>(
-//     API.HOSPITAL_URL +
-//       `${page}/${limit}?hostype=${hostype}&districtCode=${districtCode}`
-//   );
-//获取医院的等级或者获取医院地区的数据
-// export const reqHospitalLevelAndRegion = (dictCode: string) =>
-//   request.get<any, HospitalLevelAndRegionResponseData>(
-//     API.HOSPITALLEVElANDREGION_URL + dictCode
-//   );
+// ) => request.get<any, HospitalResponseData>(API.HOSPITAL_URL + `${page}/${limit}`);
+export const reqHospital = (
+  page: number,
+  limit: number,
+  hostype = "",
+  districtCode = ""
+) =>
+  request.get<any, HospitalResponseData>(
+    API.HOSPITAL_URL +
+      `${page}/${limit}?hostype=${hostype}&districtCode=${districtCode}`
+  );
+// 获取医院的等级或者获取医院地区的数据
+export const reqHospitalLevelAndRegion = (dictCode: string) =>
+  request.get<any, HospitalLevelAndRegionResponseData>(
+    API.HOSPITALLEVElANDREGION_URL + dictCode
+  );
 // //根据关键字获取医院的数据进行展示
 // export const reqHospitalInfo = (hosname: string) =>
 //   request.get<any, HospitalInfo>(API.HOSPITALINFO_URL + hosname);
