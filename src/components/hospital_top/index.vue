@@ -1,7 +1,7 @@
 <template>
   <div class="top">
     <div class="content">
-      <div class="left">
+      <div class="left"  style="cursor: pointer;" @click="goHome">
         <img src="@/assets/images/logo.png" alt="尚医通 预约挂号统一平台" />
         <span>尚医通 预约挂号统一平台</span>
       </div>
@@ -13,7 +13,13 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from 'vue-router';
+const $router = useRouter()
+function goHome(){
+  $router.push('/home')
+}
+</script>
 
 <style scoped lang="scss">
 .top {
