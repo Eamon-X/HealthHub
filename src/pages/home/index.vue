@@ -6,6 +6,7 @@
       <el-col :span="20">
         <Level @getLevel="getLevel"/>
         <Region @getRegion="getRegion"/>
+        <div style="width: 95%;">
         <div class="hospital" v-if="hasHospitalArr.length > 0">
           <Card
             class="item"
@@ -26,14 +27,18 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
         />
+      </div>
       </el-col>
-      <el-col :span="4"> 456 </el-col>
+      <el-col :span="4"> 
+        <Tip></Tip>
+      </el-col>
     </el-row>
   </div>
-</template>
+</template>t
 
 <script setup lang="ts">
 import Carousel from "./carousel/index.vue";
+import Tip from "./tip/index.vue";
 import Search from "./search/index.vue";
 import Level from "./level/index.vue";
 import Region from "./region/index.vue";
