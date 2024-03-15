@@ -10,6 +10,7 @@ import router from '@/router/index'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import pinia from '@/store/index'
 //创建应用实例
 const app = createApp(App)
 //全局注册组件
@@ -20,5 +21,6 @@ app.use(router);
 app.use(ElementPlus, {
     locale:zhCn
 });
+app.use(pinia);
 //挂载
 app.mount('#app')

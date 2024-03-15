@@ -63,7 +63,10 @@ import {
   HomeFilled,
 } from "@element-plus/icons-vue";
 import { useRouter, useRoute } from "vue-router";
-// import { onMounted } from "vue";
+import { onMounted } from "vue";
+import useDetailStore from "@/store/modules/hospitalDetail";
+//获取仓库对象
+const detailStore = useDetailStore();
 //获取路由器
 let $router = useRouter();
 //获取当前路由的信息
@@ -73,6 +76,9 @@ const changeActive = (path: string) => {
   //跳转到对应二级路由
   $router.push({ path });
 };
+onMounted(() => {
+  detailStore.getHospital($route.query.hoscode as string);
+});
 </script>
 
 <style scoped lang="scss">
