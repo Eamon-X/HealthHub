@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <HospitalTop></HospitalTop>
+    <!-- <HospitalTop></HospitalTop> -->
     <div class="content">
       <!-- <router-link to="/home">首页</router-link>
       <router-link to="/hospital">医院</router-link> -->

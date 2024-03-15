@@ -71,7 +71,7 @@ import { useRouter } from "vue-router";
 const $router = useRouter();
 function goDetail() {
   $router.push({
-    path: "/hospital",
+    path: "/hospital/register",
     query: { hoscode: props.hospitalInfo.hoscode },
   });
 }

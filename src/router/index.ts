@@ -10,6 +10,28 @@ const router = createRouter({
     {
       path: "/hospital",
       component: () => import("@/pages/hospital/index.vue"),
+      children: [
+        {
+          path: "close",
+          component: () => import("@/pages/hospital/close/index.vue"),
+        },
+        {
+          path: "detail",
+          component: () => import("@/pages/hospital/detail/index.vue"),
+        },
+        {
+          path: "notice",
+          component: () => import("@/pages/hospital/notice/index.vue"),
+        },
+        {
+          path: "register",
+          component: () => import("@/pages/hospital/register/index.vue"),
+        },
+        {
+          path: "search",
+          component: () => import("@/pages/hospital/search/index.vue"),
+        },
+      ],
     },
     {
       path: "/",

@@ -34,7 +34,7 @@
       </el-col>
     </el-row>
   </div>
-</template>t
+</template>
 
 <script setup lang="ts">
 import Carousel from "./carousel/index.vue";
