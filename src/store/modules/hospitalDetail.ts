@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { reqHospitalDetail } from "@/api/hospital";
+import { reqHospitalDetail, reqHospitalDeparment } from "@/api/hospital";
 import type { HosPitalDetail, DeparmentArr } from "@/api/hospital/type";
 //定义仓库内部存储数据state的ts类型
 export interface DetailState {
@@ -19,6 +19,12 @@ const useDetailStore = defineStore("Detail", {
       const res = await reqHospitalDetail(hoscode);
       if (res.code === 200) {
         this.hospitalInfo = res.data;
+      }
+    },
+    async getDeparment(hoscode: string) {
+      const res = await reqHospitalDeparment(hoscode);
+      if (res.code === 200) {
+        this.deparmentArr = res.data;
       }
     },
   },

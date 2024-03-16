@@ -78,6 +78,7 @@ const changeActive = (path: string) => {
 };
 onMounted(() => {
   detailStore.getHospital($route.query.hoscode as string);
+  detailStore.getDeparment($route.query.hoscode as string);
 });
 </script>
 
