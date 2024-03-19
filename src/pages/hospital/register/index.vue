@@ -109,6 +109,8 @@ import { ref } from "vue";
 //引入医院详情仓库的数据
 import useDetailStore from "@/store/modules/hospitalDetail";
 import { useRouter, useRoute } from "vue-router";
+import useUserStore from "@/store/modules/user";
+const userStore = useUserStore();
 let hospitalStore = useDetailStore();
 //获取路由器
 let $router = useRouter();
@@ -131,12 +133,13 @@ const changeIndex = (index: number) => {
 //点击科室按钮回调
 //item:即为用户选中科室的数据
 const showLogin = (item: any) => {
+  userStore.visiable = true
   //点击某一个医院科室按钮，进入到相应的预约挂号详情页面
   //跳转到预约挂号详情页面
-  $router.push({
-    path: "/hospital/register_step1",
-    query: { hoscode: $route.query.hoscode, depcode: item.depcode },
-  });
+  // $router.push({
+  //   path: "/hospital/register_step1",
+  //   query: { hoscode: $route.query.hoscode, depcode: item.depcode },
+  // });
 };
 </script>
 

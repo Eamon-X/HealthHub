@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { reqHospitalDetail, reqHospitalDeparment } from "@/api/hospital";
 import type { HosPitalDetail, DeparmentArr } from "@/api/hospital/type";
 //定义仓库内部存储数据state的ts类型
-export interface DetailState {
+interface DetailState {
   hospitalInfo: HosPitalDetail;
   deparmentArr: DeparmentArr;
 }

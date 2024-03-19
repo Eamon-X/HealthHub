@@ -1,13 +1,12 @@
 <template>
   <div class="container">
-    <!-- <HospitalTop></HospitalTop> -->
+    <HospitalTop></HospitalTop>
     <div class="content">
-      <!-- <router-link to="/home">首页</router-link>
-      <router-link to="/hospital">医院</router-link> -->
       <!-- 展示路由组件的区域 -->
       <router-view></router-view>
     </div>
     <HospitalBottom></HospitalBottom>
+    <Login />
   </div>
 </template>
 
