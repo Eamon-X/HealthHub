@@ -9,7 +9,9 @@
 import { ref, watch } from "vue";
 //倒计时的事件
 let time = ref<number>(5);
-
+//接受父组件传递过来的props->flag:用于控制计数器组件显示与隐藏的
+let props = defineProps(["flag"]);
+let $emit = defineEmits(["getFlag"]);
 //监听父组件传递过来props数据变化
 watch(
   () => props.flag,
@@ -33,9 +35,7 @@ watch(
   }
 );
 
-//接受父组件传递过来的props->flag:用于控制计数器组件显示与隐藏的
-let props = defineProps(["flag"]);
-let $emit = defineEmits(["getFlag"]);
+
 </script>
 
 <style scoped></style>

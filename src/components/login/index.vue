@@ -6,7 +6,7 @@
         <el-col :span="12">
           <div class="login">
             <div v-show="scene == 0">
-              <el-form :model="loginParam" ref="form">
+              <el-form :model="loginParam" :rules="rules" ref="form">
                 <el-form-item prop="phone">
                   <el-input
                     placeholder="请你输入手机号码"
@@ -172,6 +172,7 @@ let isPhone = computed(() => {
   //返回布尔值:真代表手机号码、假代表的即为不是手机号码
   return reg.test(loginParam.phone);
 });
+const form = ref()
 function changeScene() {
   scene.value = 1;
 }
@@ -202,7 +203,7 @@ const getFlag = (val: boolean) => {
 //点击用户登录按钮回调
 const login = async () => {
   //保证表单校验两项都复合条件
-  // await form.value.validate();
+  await form.value.validate();
   //发起登录请求
   //登录请求成功:顶部组件需要展示用户名字、对话框关闭
   //登录请求失败:弹出对应登录失败的错误信息
@@ -229,6 +230,44 @@ const login = async () => {
 const closeDialog = () => {
   userStore.visiable = false;
 };
+//自定义校验规则:手机号码自定义校验规则
+const validatorPhone = (rule: any, value: any, callBack: any) => {
+  //rule:即为表单校验规则对象
+  //value:即为当前文本的内容
+  //callBack:回调函数
+  const reg = /^1((34[0-8])|(8\d{2})|(([35][0-35-9]|4[579]|66|7[35678]|9[1389])\d{1}))\d{7}$/;
+  if (reg.test(value)) {
+    callBack();
+  } else {
+    callBack(new Error("请输入正确的手机号码格式"));
+  }
+};
+//验证码自定义校验规则
+const validatorCode = (rule: any, value: any, callBack: any) => {
+  //rule:即为表单校验规则对象
+  //value:即为当前文本的内容
+  //callBack:回调函数
+  if (/^\d{6}$/.test(value)) {
+    callBack();
+  } else {
+    callBack(new Error("请输入正确的验证码格式"));
+  }
+};
+//表单校验的规则对象
+const rules = {
+  //手机号码校验规则
+  //required:代表当前字段务必进行校验
+  //message:代表的校验错误的提示信息
+  //trigger:代表表单校验触发的时机  change:文本发生变化的时候进行校验  blur:失却焦点的时候触发校验
+  //min:代表的是最小位数
+  //max:代表的是最大的位数
+  // phone: [{ required: true, message: "手机号码务必11位", trigger: "change", min: 11 }],
+  // code: [{ required: true, message: "验证码务必6位", trigger: "blur", min: 6 }],
+
+  phone: [{ trigger: "change", validator: validatorPhone }],
+  code: [{ trigger: "change", validator: validatorCode }],
+};
+
 </script>
 
 <style scoped lang="scss">
