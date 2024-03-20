@@ -6,12 +6,14 @@
       <router-view></router-view>
     </div>
     <HospitalBottom></HospitalBottom>
-    <Login />
+    <Login v-if="userStore.visiable" />
   </div>
 </template>
 
 <script setup lang="ts">
-
+//引入用户仓库
+import useUserStore from "@/store/modules/user";
+let userStore = useUserStore();
 </script>
 
 <style scoped>
