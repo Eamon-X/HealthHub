@@ -56,7 +56,8 @@ function goUser(route: string) {
   console.log(route);
 }
 function logout() {
-  console.log('logout');
+  userStore.logout();
+  $router.push("/home");
 }
 </script>
 
