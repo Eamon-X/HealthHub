@@ -33,6 +33,11 @@ const router = createRouter({
         },
       ],
     },
+    // TODO： 了解一下ifarm路由重定向
+    {
+      path: "/wxlogin",
+      component: () => import("@/pages/wxlogin/index.vue"),
+    },
     {
       path: "/",
       redirect: "/home",

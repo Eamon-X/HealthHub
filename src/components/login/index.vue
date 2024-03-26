@@ -64,7 +64,7 @@
             <div class="webchat" v-show="scene == 1">
               <!-- 在这个容器当中显示微信扫码登录页面 -->
               <div id="login_container"></div>
-              <div class="phone">
+              <div class="phone" @click="handler">
                 <p>手机短信验证码登录</p>
                 <svg
                   t="1685676069573"
@@ -151,11 +151,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, watch } from "vue";
 import { User, Lock } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import useUserStore from "@/store/modules/user";
 import CountDown from "../countdown/index.vue";
+import { reqWxLogin } from "@/api/hospital";
 const userStore = useUserStore();
 let scene = ref(0); //0代表收集号码登录  如果是1 微信扫码登录
 let flag = ref<boolean>(false); //flag如果为真,开启倒计时  flag:为假的并非倒计时
@@ -173,9 +174,27 @@ let isPhone = computed(() => {
   return reg.test(loginParam.phone);
 });
 const form = ref()
-function changeScene() {
+async function changeScene() {
   scene.value = 1;
-}
+  //发请求获取微信扫码二维码需要参数
+  //向硅谷学校的服务器发请求,获取微信扫码登录页面参数
+  //还需要携带一个参数:告诉学校服务器用户授权成功以后重定向项目某一个页面
+  let redirect_URL = encodeURIComponent(window.location.origin + "/wxlogin");
+  let result = await reqWxLogin(redirect_URL);
+  //生成微信扫码登录二维码页面
+  //@ts-ignore
+  new WxLogin({
+    self_redirect: true, //true:手机点击确认登录后可以在 iframe 内跳转到 redirect_uri
+    id: "login_container", //显示二维码容器设置
+    appid: result.data.appid, //应用位置标识appid
+    scope: "snsapi_login", //当前微信扫码登录页面已经授权了
+    redirect_uri: result.data.redirectUri, //填写授权回调域路径,就是用户授权成功以后，微信服务器向公司后台推送code地址
+    state: result.data.state, //state就是学校服务器重定向的地址携带用户信息
+    style: "black",
+    href: "",
+  });
+};
+
 //获取验证码按钮的回调
 const getCode = async () => {
   //解决element-plus按钮禁用还能点击的问题
@@ -231,7 +250,7 @@ const closeDialog = () => {
   userStore.visiable = false;
 };
 //自定义校验规则:手机号码自定义校验规则
-const validatorPhone = (rule: any, value: any, callBack: any) => {
+const validatorPhone = (_rule: any, value: any, callBack: any) => {
   //rule:即为表单校验规则对象
   //value:即为当前文本的内容
   //callBack:回调函数
@@ -243,7 +262,7 @@ const validatorPhone = (rule: any, value: any, callBack: any) => {
   }
 };
 //验证码自定义校验规则
-const validatorCode = (rule: any, value: any, callBack: any) => {
+const validatorCode = (_rule: any, value: any, callBack: any) => {
   //rule:即为表单校验规则对象
   //value:即为当前文本的内容
   //callBack:回调函数
@@ -267,7 +286,17 @@ const rules = {
   phone: [{ trigger: "change", validator: validatorPhone }],
   code: [{ trigger: "change", validator: validatorCode }],
 };
+//点击手机短信验证码盒子回调
+const handler = () => {
+  scene.value = 0;
+};
 
+//监听场景数值
+watch(()=>scene.value,(val:number)=>{
+  if(val===1){
+    userStore.queryState()
+  }
+})
 </script>
 
 <style scoped lang="scss">
