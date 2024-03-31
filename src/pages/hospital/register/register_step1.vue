@@ -261,10 +261,10 @@ let afterArr = computed(() => {
 });
 
 //路由跳转进入到选择就诊人页面
-// const goStep2 = (doctor: Doctor) => {
-//   //编程式导航进行路由跳转且携带医生的ID
-//   $router.push({ path: "/hospital/register_step2", query: { docId: doctor.id } });
-// };
+const goStep2 = (doctor: Doctor) => {
+  //编程式导航进行路由跳转且携带医生的ID
+  $router.push({ path: "/hospital/register_step2", query: { docId: doctor.id } });
+};
 </script>
 
 <style scoped lang="scss">
