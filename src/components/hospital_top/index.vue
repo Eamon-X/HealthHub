@@ -53,7 +53,7 @@ function login() {
   userStore.visiable = true;
 }
 function goUser(route: string) {
-  console.log(route);
+  $router.push(route);
 }
 function logout() {
   userStore.logout();
