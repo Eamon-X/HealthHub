@@ -133,13 +133,13 @@ const changeIndex = (index: number) => {
 //点击科室按钮回调
 //item:即为用户选中科室的数据
 const showLogin = (item: any) => {
-  userStore.visiable = true
+  // userStore.visiable = true
   //点击某一个医院科室按钮，进入到相应的预约挂号详情页面
   //跳转到预约挂号详情页面
-  // $router.push({
-  //   path: "/hospital/register_step1",
-  //   query: { hoscode: $route.query.hoscode, depcode: item.depcode },
-  // });
+  $router.push({
+    path: "/hospital/register_step1",
+    query: { hoscode: $route.query.hoscode, depcode: item.depcode },
+  });
 };
 </script>
 
