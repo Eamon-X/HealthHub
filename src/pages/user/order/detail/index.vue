@@ -181,19 +181,19 @@ const getOrderInfo = async () => {
 };
 
 //取消订单   订单状态有三种 orderStatus  -1  取消预约  0 预约但是没有支付  1 支付成功
-// const cancel = async () => {
-//   try {
-//     //取消预约成功
-//     await reqCancelOrder($route.query.orderId as string);
-//     //再次获取订单详情的数据
-//     getOrderInfo();
-//   } catch (error) {
-//     ElMessage({
-//       type: "error",
-//       message: "取消预约失败",
-//     });
-//   }
-// };
+const cancel = async () => {
+  try {
+    //取消预约成功
+    await reqCancelOrder($route.query.orderId as string);
+    //再次获取订单详情的数据
+    getOrderInfo();
+  } catch (error) {
+    ElMessage({
+      type: "error",
+      message: "取消预约失败",
+    });
+  }
+};
 
 //点击支付按钮的回调
 // const openDialog = async () => {
