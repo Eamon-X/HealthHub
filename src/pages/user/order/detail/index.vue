@@ -135,18 +135,18 @@
     </el-card>
     <!-- 展示支付二维码的结构 -->
     <!-- 对话框通过v-model控制显示与隐藏的 true:展示 false隐藏 -->
-    <!-- <el-dialog @close="close" v-model="dialogVisible" title="微信支付" width="400"> -->
+    <el-dialog @close="close" v-model="dialogVisible" title="微信支付" width="400">
       <!-- 支付需要使用的二维码图片 -->
-      <!-- <div class="qrocde">
+      <div class="qrocde">
         <img :src="imgUrl" alt="" />
         <p>请使用微信扫一扫</p>
         <p>扫描二维码支付</p>
-      </div> -->
+      </div>
       <!-- 对话框底部插槽传递结构 -->
-      <!-- <template #footer>
+      <template #footer>
         <el-button type="primary" size="default" @click="closeDialog">关闭窗口</el-button>
-      </template> -->
-    <!-- </el-dialog> -->
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -196,45 +196,45 @@ const cancel = async () => {
 };
 
 //点击支付按钮的回调
-// const openDialog = async () => {
-//   //展示对话框
-//   dialogVisible.value = true;
-//   //获取支付需要使用二维码信息
-//   let result: QrCode = await reqQrcode($route.query.orderId as string);
-//   //更具服务器返回二维码信息生成二维码图片
-//   imgUrl.value = await QRCode.toDataURL(result.data.codeUrl);
-//   //询问服务器当前这笔交易的支付结果
-//   //只要二维码查来:需要每隔几秒询问服务器是否支付成功
+const openDialog = async () => {
+  //展示对话框
+  dialogVisible.value = true;
+  //获取支付需要使用二维码信息
+  let result: QrCode = await reqQrcode($route.query.orderId as string);
+  //更具服务器返回二维码信息生成二维码图片
+  imgUrl.value = await QRCode.toDataURL(result.data.codeUrl);
+  //询问服务器当前这笔交易的支付结果
+  //只要二维码查来:需要每隔几秒询问服务器是否支付成功
 
-//   timer.value = setInterval(async () => {
-//     let result: PayReslt = await reqQueryPayState($route.query.orderId as string);
-//     //如果服务器返回的数据data:true,代表支付成功
-//     if (result.data) {
-//       //关闭对话框
-//       dialogVisible.value = false;
-//       //提示信息
-//       ElMessage({
-//         type: "success",
-//         message: "支付成功",
-//       });
-//       //清除定时器
-//       clearInterval(timer.value);
-//       //再次获取订单详情的数据
-//       getOrderInfo();
-//     }
-//   }, 2000);
-// };
+  timer.value = setInterval(async () => {
+    let result: PayReslt = await reqQueryPayState($route.query.orderId as string);
+    //如果服务器返回的数据data:true,代表支付成功
+    if (result.data) {
+      //关闭对话框
+      dialogVisible.value = false;
+      //提示信息
+      ElMessage({
+        type: "success",
+        message: "支付成功",
+      });
+      //清除定时器
+      clearInterval(timer.value);
+      //再次获取订单详情的数据
+      getOrderInfo();
+    }
+  }, 2000);
+};
 //关闭窗口的回调
-// const closeDialog = () => {
-//   //关闭对话框,对话框隐藏
-//   dialogVisible.value = false;
-//   //清除定时器
-//   clearInterval(timer.value);
-// };
+const closeDialog = () => {
+  //关闭对话框,对话框隐藏
+  dialogVisible.value = false;
+  //清除定时器
+  clearInterval(timer.value);
+};
 //对话框右上角关闭的叉子的回调
-// const close = ()=>{
-//   clearInterval(timer.value);
-// }
+const close = ()=>{
+  clearInterval(timer.value);
+}
 </script>
 
 <style scoped lang="scss">
