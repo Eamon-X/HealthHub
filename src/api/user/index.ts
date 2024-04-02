@@ -17,7 +17,7 @@ enum API {
     USERINFO_URL = '/user/auth/getUserInfo',
     //获取证件的类型的接口地址
     CERTIFICATIONTYPE_URL = '/cmn/dict/findByDictCode/',
-    //用户认证的结构
+    //用户认证的接口
     USERCERTATION_URL = '/user/auth/userAuah',
     //获取用户订单号的数据
     USERORDERINFO_URL = '/order/orderInfo/auth/',
