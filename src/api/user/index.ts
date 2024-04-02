@@ -54,7 +54,7 @@ export const reqUserCertation = (data: UserParams) => request.post<any, any>(API
 export const reqUserOrderInfo = (page: number, limit: number, patientId: string, orderStatus: string) => request.get<any, UserOrderInfoResponseData>(API.USERORDERINFO_URL + `${page}/${limit}?patientId=${patientId}&orderStatus=${orderStatus}`)
 //获取全部就诊人的信息
 export const reqAllUser = () => request.get<any, AllUserResponseData>(API.ALLUSER_URL);
-//获取全部订单的接口
+//获取全部订单状态的接口
 export const reqOrderState = () => request.get<any, AllOrderStateResponseData>(API.ORDERSTATE_URL);
 //获取城市的数据
 export const reqCity = (parentId: string) => request.get<any, any>(API.CITY_URL + parentId);
