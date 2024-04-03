@@ -166,10 +166,10 @@ const submitOrder = async () => {
 };
 
 // //预约挂号添加就诊人按钮的方法
-// const goUser = ()=>{
-//    //路由跳转
-//    $router.push({path:'/user/patient',query:{type:'add'}})
-// }
+const goUser = ()=>{
+   //路由跳转
+   $router.push({path:'/user/patient',query:{type:'add'}})
+}
 </script>
 
 <style scoped lang="scss">
