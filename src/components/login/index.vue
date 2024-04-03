@@ -157,6 +157,9 @@ import { ElMessage } from "element-plus";
 import useUserStore from "@/store/modules/user";
 import CountDown from "../countdown/index.vue";
 import { reqWxLogin } from "@/api/hospital";
+import { useRoute, useRouter } from "vue-router";
+let $route = useRoute();
+let $router = useRouter();
 const userStore = useUserStore();
 let scene = ref(0); //0代表收集号码登录  如果是1 微信扫码登录
 let flag = ref<boolean>(false); //flag如果为真,开启倒计时  flag:为假的并非倒计时
@@ -173,7 +176,7 @@ let isPhone = computed(() => {
   //返回布尔值:真代表手机号码、假代表的即为不是手机号码
   return reg.test(loginParam.phone);
 });
-const form = ref()
+const form = ref();
 async function changeScene() {
   scene.value = 1;
   //发请求获取微信扫码二维码需要参数
@@ -193,7 +196,7 @@ async function changeScene() {
     style: "black",
     href: "",
   });
-};
+}
 
 //获取验证码按钮的回调
 const getCode = async () => {
@@ -232,12 +235,12 @@ const login = async () => {
     //关闭对话框
     userStore.visiable = false;
     //获取url的query参数
-    // let redirect = $route.query.redirect;
-    // if(redirect){
-    //   $router.push(redirect as string);
-    // }else{
-    //   $router.push('/home');
-    // }
+    let redirect = $route.query.redirect;
+    if (redirect) {
+      $router.push(redirect as string);
+    } else {
+      $router.push("/home");
+    }
   } catch (error) {
     ElMessage({
       type: "error",
@@ -254,7 +257,8 @@ const validatorPhone = (_rule: any, value: any, callBack: any) => {
   //rule:即为表单校验规则对象
   //value:即为当前文本的内容
   //callBack:回调函数
-  const reg = /^1((34[0-8])|(8\d{2})|(([35][0-35-9]|4[579]|66|7[35678]|9[1389])\d{1}))\d{7}$/;
+  const reg =
+    /^1((34[0-8])|(8\d{2})|(([35][0-35-9]|4[579]|66|7[35678]|9[1389])\d{1}))\d{7}$/;
   if (reg.test(value)) {
     callBack();
   } else {
@@ -292,11 +296,14 @@ const handler = () => {
 };
 
 //监听场景数值
-watch(()=>scene.value,(val:number)=>{
-  if(val===1){
-    userStore.queryState()
+watch(
+  () => scene.value,
+  (val: number) => {
+    if (val === 1) {
+      userStore.queryState();
+    }
   }
-})
+);
 </script>
 
 <style scoped lang="scss">
